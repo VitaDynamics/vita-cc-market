@@ -1,0 +1,19 @@
+{
+  "name": "vita-dynamics",
+  "owner": {
+    "name": "Vita Dynamics",
+    "email": "heng.li@vita.cn"
+  },
+  "plugins": [
+{
+  "name": "rcp",
+  "version": "1.0.0",
+  "description": "BCP Utils",
+  "author": {
+    "name": "Vita Dynamics",
+    "email": "heng.li@vita.cn"
+  },
+  "source": "./plugins/RCP"
+}
+  ]
+}
