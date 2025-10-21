@@ -32,27 +32,21 @@ Before proceeding, clarify the following with the user:
 
 Adding new context keys involves the following steps:
 
-### 1. Update ROS2 Message Definition
-- Edit the appropriate `.msg` file in `src/application/function_statemachine/msg/`
-- Add new field with correct data type and descriptive comment
+[] Message file has been updated
+[] Enum value has been correctly defined in context_keys.h
+[] Setter has been registered in corresponding registration file
+[] Use safeconv::to<T>() for type conversion
+[] Documentation has been updated
+[] Compilation test passes in the context part of the Robot Context Protocol (FSM) component
 
-### 2. Rebuild Messages
-```bash
-build_msgs
-```
-
-### 3. Add Enum Key
-- Update `context_keys.h` with new enum entry in appropriate section (Function/DAG/System)
-- Follow naming convention: `CONTEXT_KEY_<MODULE>_<NAME>`
-
-### 4. Register Lambda Function
-- Edit appropriate `*_registration.cpp` file based on key type
-- Implement getter/setter lambda with proper type casting
-- Ensure thread-safe access to underlying data structure
-
-### 5. Update Aggregation (if new module)
-- If adding first key from new module, update `context_registrations.h`
-- Include new registration header and call registration function
+Adding a new module
+[] Create *Status.msg file
+[] Add module reference in FunctionStatus.msg
+[] Add all field enums in context_keys.h
+[] Create *_context_registration.{h,cpp} file
+[] Include and register call in context_registrations.h
+[] Add module state member in state_aggregator.h
+[] Compilation test passes in the fsm part of the Robot Context Protocol (FSM) component
 
 ### 6. Rebuild Context System
 
