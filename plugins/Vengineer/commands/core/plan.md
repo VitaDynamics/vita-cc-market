@@ -370,6 +370,20 @@ end
 
 Write the plan to `plans/<issue_title>.md`
 
+## Refine Plan
+
+After the first Plan is generated, engage in multiple rounds of interaction with the user to Refine the Plan.
+
+NOTE THAT YOU SHOULD USE THE TOOL **AskUserQuestion** TO INTERACT WITH THE USER OR ANY OTHER TOOLS THAT CAN INVOLVE THE USER IN THE PROCESS.
+
+**Interaction Guidelines:**
+
+- When weighing the pros and cons, ask the user explicit questions or solicit their input.
+- **Note:** You can ask the user questions or clarify at any time during this workflow. Do not make too many assumptions about the user's intentions.
+- Iterate on the plan content in `plans/<issue_title>.md` based on feedback.
+
+Only proceed to **Post-Generation Options** once the user is satisfied with the refined plan.
+
 ## Post-Generation Options
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
@@ -388,9 +402,8 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 Based on selection:
 - **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
-- **`/plan_review`** → Call the /plan_review command with the plan file path
+- **`/plan_review`** → Call the /plan_review command with the plan file path. Span reviewers based on project conventions
 - **`/core:work`** → Call the /core:work command with the plan file path
-- **`/core:work` on remote** → Run `/core:work plans/<issue_title>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
