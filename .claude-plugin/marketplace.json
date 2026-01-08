@@ -1,29 +1,19 @@
 {
-  "name": "vita-dynamics",
+  "name": "Vengineer",
   "owner": {
-    "name": "Vita Dynamics",
+    "name": "Vengineer",
     "email": "heng.li@vita.cn"
   },
   "plugins": [
 {
-  "name": "rcp",
+  "name": "Vengineer",
   "version": "1.0.0",
   "description": "BCP Utils",
   "author": {
-    "name": "Vita Dynamics",
+    "name": "Vengineer",
     "email": "heng.li@vita.cn"
   },
-  "source": "./plugins/RCP"
-},
-{
-  "name": "vita-core",
-  "version": "1.0.0",
-  "description": "Vita Core Utils for developers in Vita Dynamics",
-  "author": {
-    "name": "Vita Dynamics",
-    "email": "heng.li@vita.cn"
-  },
-  "source": "./plugins/Vita"
+  "source": "./plugins/Vengineer"
 }
   ]
 }
