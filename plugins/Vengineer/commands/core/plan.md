@@ -366,6 +366,20 @@ end
 - [ ] Add names of files in pseudo code examples and todo lists
 - [ ] Add an ERD mermaid diagram if applicable for new model changes
 
+## Ambiguity Check before Plan Finalization
+
+After the initial plan is generated, but before engaging in general refinement, evaluate the situation against this ambiguity matrix:
+
+| Situation | Action |
+|-----------|--------|
+| Single valid interpretation | Proceed |
+| Multiple interpretations, similar effort | Proceed with reasonable default, note assumption |
+| Multiple interpretations, 2x+ effort difference | **MUST ask** |
+| Missing critical info (file, error, context) | **MUST ask** |
+| User's design seems flawed or suboptimal | **MUST raise concern** before implementing |
+
+If the action requires you to **MUST ask** or **MUST raise concern**, use the **AskUserQuestion** tool immediately to resolve these specific issues before proceeding to the standard refinement phase.
+
 ## Output Format
 
 Write the plan to `plans/<issue_title>.md`
