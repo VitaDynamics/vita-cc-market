@@ -76,7 +76,64 @@ After planning the issue structure, run SpecFlow Analyzer to validate and refine
 - [ ] Incorporate any identified gaps or edge cases into the issue
 - [ ] Update acceptance criteria based on SpecFlow findings
 
-### 4. Choose Implementation Detail Level
+### 4. Design Visualization (Strongly Recommended)
+
+**Every plan SHOULD include at least one Mermaid diagram** showing the design flow. This helps visualize:
+- Input → Processing → Output flow
+- Module interactions and boundaries
+- Data relationships
+
+Choose the most appropriate diagram type:
+
+#### Sequence Diagram (for interactions/flows)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant Database
+
+    User->>Frontend: Action
+    Frontend->>API: Request
+    API->>Database: Query
+    Database-->>API: Result
+    API-->>Frontend: Response
+    Frontend-->>User: Display
+```
+
+#### Flowchart (for processing logic)
+```mermaid
+flowchart TD
+    A[Input] --> B{Validate}
+    B -->|Valid| C[Process]
+    B -->|Invalid| D[Error]
+    C --> E[Transform]
+    E --> F[Output]
+```
+
+#### Entity Relationship (for data models)
+```mermaid
+erDiagram
+    USER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    PRODUCT ||--o{ LINE_ITEM : "ordered in"
+```
+
+**Diagram Checklist:**
+- [ ] Shows input → processing → output flow
+- [ ] Identifies key modules/components involved
+- [ ] Highlights integration points or boundaries
+- [ ] Uses clear, descriptive labels
+
+**When to use which:**
+| Diagram Type | Use When |
+|--------------|----------|
+| Sequence | API calls, user flows, service interactions |
+| Flowchart | Decision logic, data processing, state machines |
+| ERD | New models, database changes, entity relationships |
+| Class | Object relationships, inheritance, interfaces |
+
+### 5. Choose Implementation Detail Level
 
 Select how comprehensive you want the issue to be, simpler is mostly better.
 
@@ -298,7 +355,7 @@ end
 - Design documents: [links]
 ```
 
-### 5. Issue Creation & Formatting
+### 6. Issue Creation & Formatting
 
 <thinking>
 Apply best practices for clarity and actionability, making the issue easy to scan and understand
@@ -354,7 +411,7 @@ end
 - [ ] Emphasize comprehensive testing given rapid implementation
 - [ ] Document any AI-generated code that needs human review
 
-### 6. Final Review & Submission
+### 7. Final Review & Submission
 
 **Pre-submission Checklist:**
 
@@ -364,7 +421,8 @@ end
 - [ ] Links and references are working
 - [ ] Acceptance criteria are measurable
 - [ ] Add names of files in pseudo code examples and todo lists
-- [ ] Add an ERD mermaid diagram if applicable for new model changes
+- [ ] **Strongly Recommended:** At least one Mermaid diagram showing design flow (sequence, flowchart, or ERD)
+- [ ] If no diagram included, add a note explaining why (e.g., "trivial change, no visualization needed")
 
 ## Ambiguity Check before Plan Finalization
 
@@ -410,49 +468,18 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 3. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
 4. **Start `/core:work`** - Begin implementing this plan locally
 5. **Start `/core:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
-6. **Create Issue** - Create issue in project tracker (GitHub/Linear)
-7. **Simplify** - Reduce detail level
+6. **Simplify** - Reduce detail level
 
 Based on selection:
 - **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
-- **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
-- **`/plan_review`** → Call the /plan_review command with the plan file path. Span reviewers based on project conventions
+- **`/core:deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
+- **`/core:plan_review`** → Call the /plan_review command with the plan file path. Spawn reviewers based on project conventions
 - **`/core:work`** → Call the /core:work command with the plan file path
-- **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
 
 **Note:** If running `/core:plan` with ultrathink enabled, automatically run `/deepen-plan` after plan creation for maximum depth and grounding.
 
 Loop back to options after Simplify or Other changes until user selects `/core:work` or `/plan_review`.
-
-## Issue Creation
-
-When user selects "Create Issue", detect their project tracker from CLAUDE.md:
-
-1. **Check for tracker preference** in user's CLAUDE.md (global or project):
-   - Look for `project_tracker: github` or `project_tracker: linear`
-   - Or look for mentions of "GitHub Issues" or "Linear" in their workflow section
-
-2. **If GitHub:**
-   ```bash
-   # Extract title from plan filename (kebab-case to Title Case)
-   # Read plan content for body
-   gh issue create --title "feat: [Plan Title]" --body-file plans/<issue_title>.md
-   ```
-
-3. **If Linear:**
-   ```bash
-   # Use linear CLI if available, or provide instructions
-   # linear issue create --title "[Plan Title]" --description "$(cat plans/<issue_title>.md)"
-   ```
-
-4. **If no tracker configured:**
-   Ask user: "Which project tracker do you use? (GitHub/Linear/Other)"
-   - Suggest adding `project_tracker: github` or `project_tracker: linear` to their CLAUDE.md
-
-5. **After creation:**
-   - Display the issue URL
-   - Ask if they want to proceed to `/core:work` or `/plan_review`
 
 NEVER CODE! Just research and write the plan.
