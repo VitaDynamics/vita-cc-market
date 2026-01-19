@@ -464,22 +464,23 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
-2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
-3. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
-4. **Start `/core:work`** - Begin implementing this plan locally
-5. **Start `/core:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
+2. **Run `/core:clarify`** - Ask targeted questions to reduce ambiguity in the plan
+3. **Run `/core:deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
+4. **Run `/core:plan_review`** - Get feedback from specialized reviewers
+5. **Start `/core:work`** - Begin implementing this plan
 6. **Simplify** - Reduce detail level
 
 Based on selection:
 - **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
-- **`/core:deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
-- **`/core:plan_review`** → Call the /plan_review command with the plan file path. Spawn reviewers based on project conventions
-- **`/core:work`** → Call the /core:work command with the plan file path
+- **`/core:clarify`** → Call the command with the plan file path to ask targeted clarification questions
+- **`/core:deepen-plan`** → Call the command with the plan file path to enhance with research
+- **`/core:plan_review`** → Call the command with the plan file path. Spawn reviewers based on project conventions
+- **`/core:work`** → Call the command with the plan file path
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
 
-**Note:** If running `/core:plan` with ultrathink enabled, automatically run `/deepen-plan` after plan creation for maximum depth and grounding.
+**Note:** If running `/core:plan` with ultrathink enabled, automatically run `/core:deepen-plan` after plan creation for maximum depth and grounding.
 
-Loop back to options after Simplify or Other changes until user selects `/core:work` or `/plan_review`.
+Loop back to options after Simplify or Other changes until user selects `/core:work` or `/core:plan_review`.
 
 NEVER CODE! Just research and write the plan.
