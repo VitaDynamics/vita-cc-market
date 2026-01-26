@@ -1,5 +1,5 @@
 ---
-name: plan
+name: medium-plan
 description: Transform feature descriptions into well-structured project plans following conventions
 allowed-tools:
   - Task
