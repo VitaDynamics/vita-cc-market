@@ -1,62 +1,27 @@
 ---
 name: core:compound
-description: Document a recently solved problem to compound your team's knowledge
+description: Document a recently solved problem to compound your team's knowledge (compatibility stub)
 argument-hint: "[optional: brief context about the fix]"
 ---
 
-# /compound
+# Compatibility Stub - Use skill: compound-docs instead
 
-Coordinate multiple subagents working in parallel to document a recently solved problem.
+**Note**: This command has been migrated to the `compound-docs` skill. Use `skill: compound-docs` for the full functionality.
 
-## Purpose
+skill: compound-docs $ARGUMENTS
 
-Captures problem solutions while context is fresh, creating structured documentation in `docs/solutions/` with YAML frontmatter for searchability and future reference. Uses parallel subagents for maximum efficiency.
+---
 
-**Why "compound"?** Each documented solution compounds your team's knowledge. The first time you solve a problem takes research. Document it, and the next occurrence takes minutes. Knowledge compounds.
+**Migration Information:**
+- Original command: `/core:compound`
+- Migrated to: `compound-docs` skill
+- Migration pattern: D (Skills Already Exist)
+- Status: Compatibility stub for backward compatibility
 
-## Usage
-
-```bash
-/core:compound                    # Document the most recent fix
-/core:compound [brief context]    # Provide additional context hint
+**To use the new skill directly:**
 ```
-
-## Execution Strategy: Parallel Subagents
-
-This command launches multiple specialized subagents IN PARALLEL to maximize efficiency:
-
-### 1. **Context Analyzer** (Parallel)
-   - Extracts conversation history
-   - Identifies problem type, component, symptoms
-   - Validates against CORA schema
-   - Returns: YAML frontmatter skeleton
-
-### 2. **Solution Extractor** (Parallel)
-   - Analyzes all investigation steps
-   - Identifies root cause
-   - Extracts working solution with code examples
-   - Returns: Solution content block
-
-### 3. **Related Docs Finder** (Parallel)
-   - Searches `docs/solutions/` for related documentation
-   - Identifies cross-references and links
-   - Finds related GitHub issues
-   - Returns: Links and relationships
-
-### 4. **Prevention Strategist** (Parallel)
-   - Develops prevention strategies
-   - Creates best practices guidance
-   - Generates test cases if applicable
-   - Returns: Prevention/testing content
-
-### 5. **Category Classifier** (Parallel)
-   - Determines optimal `docs/solutions/` category
-   - Validates category against schema
-   - Suggests filename based on slug
-   - Returns: Final path and filename
-
-### 6. **Documentation Writer** (Parallel)
-   - Assembles complete markdown file
+skill: compound-docs [optional context]
+```
    - Validates YAML frontmatter
    - Formats content for readability
    - Creates the file in correct location
