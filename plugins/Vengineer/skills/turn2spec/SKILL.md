@@ -30,7 +30,7 @@ Do not proceed until you have material to transform.
 
 Determine input type and load accordingly:
 
-- **File path** (e.g., `docs/adr/001-auth.md`, `plans/rough-plan.md`): Read the file using the Read tool.
+- **File path** (e.g., `docs/sketches/2026-01-15-auth.md`, `docs/plans/rough-plan.md`): Read the file using the Read tool.
 - **Inline text**: Use the pasted content directly.
 - **Multiple files**: Read each file and merge context.
 
@@ -88,7 +88,24 @@ For each distinct user flow found in the source:
 
 ## Stage 4: Write the Spec
 
-Write the completed spec to `specs/<feature-name>.md` using the template structure.
+Write the completed spec to `docs/specs/<feature-name>.md` using the template structure.
+
+Add YAML frontmatter at the top of the spec file:
+```yaml
+---
+stage: spec
+created: YYYY-MM-DD
+feature: <feature-name>
+source-sketch: <path to input sketch file if input was from docs/sketches/, else omit>
+status: draft
+---
+```
+
+If the input was from `docs/sketches/`, also update the sketch file's frontmatter to add:
+```yaml
+next-spec: docs/specs/<feature-name>.md
+```
+Use the Edit tool to append this field inside the existing `---` block without corrupting other fields.
 
 **Quality rules** (apply before writing):
 
@@ -134,10 +151,10 @@ Report the result: spec path, number of user stories, number of requirements, an
 
 Use **AskUserQuestion** to present options:
 
-**Question:** "Spec ready at `specs/<feature-name>.md`. What would you like to do next?"
+**Question:** "Spec ready at `docs/specs/<feature-name>.md`. What would you like to do next?"
 
 **Options:**
-1. **Run `/core:plan`** — Generate implementation plan from this spec (Recommended)
+1. **Run `medium-plan docs/specs/<feature-name>.md`** — Generate implementation plan from this spec (Recommended)
 2. **Run `/core:clarify`** — Ask targeted questions to deepen the spec further
 3. **Run `/core:plan_review`** — Get feedback from specialized reviewers
 4. **Edit spec** — Open the spec file for manual review

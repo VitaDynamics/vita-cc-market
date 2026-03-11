@@ -25,7 +25,8 @@ Deepen target: ${ARGUMENTS}
 ### Phase 1: Plan Analysis
 
 1. **Read and Understand Plan**
-   - Read the entire plan document
+   - Read the entire plan document (expected location: `docs/plans/`)
+   - If the plan frontmatter contains `source-spec:`, read the referenced spec file for additional context
    - Identify key sections and requirements
    - Note areas that need additional depth or clarification
 
@@ -89,8 +90,8 @@ Launch specialized research agents in parallel based on plan needs:
 
 3. **Next Steps**
    - Option to further refine specific sections
-   - Proceed to implementation planning
-   - Generate documentation from deepened plan
+   - Run `adr docs/plans/<feature-name>.md` — capture key architectural decisions as permanent ADRs
+   - Start `/core:work docs/plans/<feature-name>.md` — begin implementation
 
 ## Output Features
 

@@ -8,7 +8,7 @@ allowed-tools:
   - Task
   - AskUserQuestion
 preconditions:
-  - At least one plan file exists in plans/ OR the user provides plan content directly
+  - At least one plan file exists in docs/plans/ OR the user provides plan content directly
   - gh CLI is authenticated (gh auth status)
 ---
 
@@ -42,12 +42,12 @@ preconditions:
 ### 1. Select plan file(s)
 
 - If `${ARGUMENTS}` contains file paths, use those directly.
-- Otherwise, list all files under `plans/`:
+- Otherwise, list all files under `docs/plans/`:
   ```bash
-  ls plans/
+  ls docs/plans/
   ```
   Use **AskUserQuestion** to present the list and let the user pick one or more files (multiple selection enabled).
-- If `plans/` is empty or absent, ask the user to paste or describe the plan content directly.
+- If `docs/plans/` is empty or absent, ask the user to paste or describe the plan content directly.
 
 ### 2. Analyse each plan — parallel agents
 

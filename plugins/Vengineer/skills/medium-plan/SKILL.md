@@ -138,7 +138,40 @@ erDiagram
 | ERD | New models, database changes, entity relationships |
 | Class | Object relationships, inheritance, interfaces |
 
-### 5. Choose Implementation Detail Level
+### 5. Parallelization Strategy
+
+Every plan MUST include an **Execution Strategy** section identifying which implementation phases can run concurrently.
+
+**Required elements:**
+
+1. **Mermaid `graph LR` dependency diagram** — nodes = phases, directed edges = "must complete before"; green fill (`style X fill:#d4edda`) = can start immediately with no prerequisites
+
+2. **Phase table**:
+
+| Phase | Name | Depends On | Can Parallelize With | Effort |
+|-------|------|------------|----------------------|--------|
+| A | Example Phase | — | B | M |
+| B | Another Phase | — | A | S |
+| C | Third Phase | A, B | — | L |
+
+3. **Inline task tags** within each phase's task list:
+   - `[PARALLEL:group-id]` — tasks with the same group-id can run simultaneously
+   - `[SERIAL:after-group-id]` — task depends on all tasks in that group completing
+
+**Example:**
+```mermaid
+graph LR
+  A[Phase 1: Schema] --> C[Phase 3: API]
+  B[Phase 2: Auth]   --> C
+  C --> D[Phase 4: Frontend]
+  C --> E[Phase 5: Jobs]
+  D --> F[Phase 6: Tests]
+  E --> F
+  style A fill:#d4edda
+  style B fill:#d4edda
+```
+
+### 6. Choose Implementation Detail Level
 
 Select how comprehensive you want the issue to be, simpler is mostly better.
 
@@ -318,7 +351,24 @@ If the action requires you to **MUST ask** or **MUST raise concern**, use the **
 
 ## Output Format
 
-Write the plan to `plans/<issue_title>.md`
+Write the plan to `docs/plans/<feature-name>.md`
+
+Add YAML frontmatter at the top of the plan file:
+```yaml
+---
+stage: plan
+created: YYYY-MM-DD
+feature: <feature-name>
+source-spec: <path to input spec file if input was from docs/specs/, else omit>
+status: draft
+---
+```
+
+If the input was from `docs/specs/`, also update the spec file's frontmatter to add:
+```yaml
+next-plan: docs/plans/<feature-name>.md
+```
+Use the Edit tool to append this field inside the existing `---` block without corrupting other fields.
 
 ## Refine Plan
 
@@ -338,21 +388,23 @@ Only proceed to **Post-Generation Options** once the user is satisfied with the 
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan ready at `docs/plans/<feature-name>.md`. What would you like to do next?"
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
 2. **Run `/core:clarify`** - Ask targeted questions to reduce ambiguity in the plan
 3. **Run `/core:deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
 4. **Run `/core:plan_review`** - Get feedback from specialized reviewers
-5. **Start `/core:work`** - Begin implementing this plan
-6. **Simplify** - Reduce detail level
+5. **Generate ADR** - Capture architectural decisions from this plan as permanent records (`adr`)
+6. **Start `/core:work`** - Begin implementing this plan
+7. **Simplify** - Reduce detail level
 
 Based on selection:
-- **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
+- **Open plan in editor** → Run `open docs/plans/<feature-name>.md` to open the file in the user's default editor
 - **`/core:clarify`** → Call the command with the plan file path to ask targeted clarification questions
 - **`/core:deepen-plan`** → Call the command with the plan file path to enhance with research
 - **`/core:plan_review`** → Call the command with the plan file path. Spawn reviewers based on project conventions
+- **Generate ADR** → Run the `adr` skill with `docs/plans/<feature-name>.md` as input
 - **`/core:work`** → Call the command with the plan file path
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
