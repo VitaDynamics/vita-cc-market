@@ -48,7 +48,8 @@ Parse the source material and extract:
 | **Feature Name** | Title, heading, or dominant topic |
 | **Actors** | Who uses this — users, admins, systems, services |
 | **Core Actions** | What users/systems do — verbs and flows described |
-| **Constraints** | Limitations, non-goals, scope boundaries |
+| **Constraints** | Limitations, scope boundaries |
+| **Non-Goals** | Explicit exclusions: "out of scope", "not included", "future work", "does not cover", deferred items |
 | **Success Signals** | Goals, KPIs, "done when" statements |
 | **Decisions Made** | ADR rationale, chosen approaches, rejected alternatives |
 | **Open Questions** | Unresolved items, TBDs, items marked for future |
@@ -78,6 +79,12 @@ For each distinct user flow found in the source:
 
 ### Key Entities
 - List entities from the source, stripped of implementation details (no table schemas, ORM fields, or type annotations — just what the entity represents and its relationships)
+
+### Non-Goals
+- Extract all explicit exclusions, scope limits, and deferred items from the source
+- Format: `NG-XXX: [What this feature will NOT do or support]`
+- If the source has no explicit non-goals, derive 1-2 from the scope of the feature (e.g., what adjacent capabilities are clearly out of scope)
+- Minimum one NG item required
 
 ### Success Criteria
 - Transform goals/KPIs from the source into measurable, technology-agnostic outcomes
@@ -113,6 +120,7 @@ Use the Edit tool to append this field inside the existing `---` block without c
 - [ ] Written for non-technical stakeholders — business language, not engineering jargon
 - [ ] Every requirement is testable and unambiguous
 - [ ] Success criteria are measurable and technology-agnostic
+- [ ] Non-Goals section present with at least one NG item
 - [ ] All mandatory sections from the template are present
 
 ## Stage 5: Handle Gaps & Clarifications

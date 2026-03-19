@@ -16,6 +16,9 @@ vita-cc-market/
 │   │   ├── commands/           # Slash commands
 │   │   ├── skills/             # User-invocable skills
 │   │   └── hooks/              # Plugin hooks
+│   ├── TeamManager/            # Team management plugin (GitHub Projects + Linear)
+│   │   ├── skills/             # team-manage, batch-goals, post-discussion, linear-manage
+│   │   └── references/         # config-template.md (copy to config.md and fill in)
 │   └── Vengineer-RCP/          # RCP-specific plugin (legacy)
 └── .claude-plugin/
     └── marketplace.json        # Plugin marketplace metadata
@@ -40,7 +43,11 @@ vita-cc-market/
 - `research/` - Research agents (best practices, framework docs, git history, repo analysis)
 
 **Skills** (`plugins/Vengineer/skills/`):
+- `light-plan-brain-storming/` - Free-form brainstorm through dialogue → produces docs/sketches/ artifact. Use BEFORE medium-plan
 - `compound-docs/` - Capture solved problems as categorized documentation with YAML frontmatter
+- `commit/` - Analyze session changes, propose conventional commit message, execute after confirmation
+- `check-refs/` - Audit cross-reference integrity across all docs/ markdown files
+- `alphaxiv/` - Look up academic papers via AlphaXiv API, save annotated notes to docs/research/
 - `create-agent-skills/` - Create or edit Claude Code skills
 - `git-worktree/` - Manage Git worktrees for isolated parallel development
 - `skill-creator/` - Guide for creating effective skills
@@ -50,6 +57,7 @@ vita-cc-market/
 
 **Hooks** (`plugins/Vengineer/hooks/`):
 - `add-language-context.py` - Automatically adds language preference (Chinese/English) to context based on user input
+- `detect-solution.py` - Detects solution confirmation phrases ("that worked", "it's fixed") and auto-triggers compound-docs
 
 ## MCP Server Configuration
 

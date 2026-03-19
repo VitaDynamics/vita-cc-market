@@ -38,6 +38,11 @@ Acceptance Scenarios:
 Given [initial state], When [action], Then [expected outcome]
 [Add more user stories as needed, each with an assigned priority]
 
+Non-Goals (mandatory)
+NG-001: [What this feature explicitly will NOT do — e.g., "does not support X use case"]
+NG-002: [Scope boundary explicitly excluded — e.g., "does not replace Y system"]
+[Add more as needed to clearly define what is out of scope]
+
 Edge Cases
 What happens when [boundary condition]?
 How does system handle [error scenario]?

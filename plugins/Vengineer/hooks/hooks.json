@@ -1,5 +1,5 @@
 {
-  "description": "Automatically add language preference context based on user input language (Chinese vs English)",
+  "description": "Vengineer hooks: language context detection and solution confirmation capture",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -7,6 +7,10 @@
           {
             "type": "command",
             "command": "${CLAUDE_PLUGIN_ROOT}/hooks/add-language-context.py"
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/detect-solution.py"
           }
         ]
       }

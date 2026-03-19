@@ -33,11 +33,19 @@ Do not proceed until you have a clear feature description from the user.
 First, I need to understand the project's conventions and existing patterns, leveraging all available resources and use parallel subagents to do this.
 </thinking>
 
-Run these three agents in parallel at the same time:
+Run these three agents in parallel at the same time. For each agent: read the referenced file to get the system prompt (use the body after the YAML frontmatter `---`), then launch a `general-purpose` Task agent with that system prompt.
 
-- Task repo-research-analyst(feature_description)
-- Task best-practices-researcher(feature_description)
-- Task framework-docs-researcher(feature_description)
+**Agent 1 — Repository Research:**
+- System prompt file: `plugins/Vengineer/agents/research/repo-research-analyst.md`
+- User prompt: "Research repository conventions and patterns for: {feature_description}"
+
+**Agent 2 — Best Practices Research:**
+- System prompt file: `plugins/Vengineer/agents/research/best-practice-research.md`
+- User prompt: "Research industry best practices relevant to: {feature_description}"
+
+**Agent 3 — Framework Documentation:**
+- System prompt file: `plugins/Vengineer/agents/research/framework-docs-researcher.md`
+- User prompt: "Research framework and library documentation relevant to: {feature_description}"
 
 **Reference Collection:**
 
@@ -73,7 +81,9 @@ Think like a product manager - what would make this issue clear and actionable? 
 
 After planning the issue structure, run SpecFlow Analyzer to validate and refine the feature specification:
 
-- Task spec-flow-analyzer(feature_description, research_findings)
+Launch a `general-purpose` Task agent (prefer a fast/small model like Claude Haiku if available) with:
+- System prompt file: `plugins/Vengineer/agents/core/spec-flow-analyzer.md` (body after the YAML frontmatter)
+- User prompt: "{feature_description}. Research findings: {research_findings}"
 
 **SpecFlow Analyzer Output:**
 

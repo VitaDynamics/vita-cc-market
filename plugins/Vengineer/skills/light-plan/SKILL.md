@@ -1,6 +1,6 @@
 ---
-name: light-plan(brain-storming)
-description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+name: light-plan-brain-storming
+description: "Free-form collaborative brainstorm: explore an idea through dialogue, propose 2-3 approaches, then produce a docs/sketches/ design document. Use BEFORE medium-plan or turn2spec when the idea is still rough. For a more structured plan with research agents, use medium-plan instead."
 ---
 
 # Brainstorming Ideas Into Designs
